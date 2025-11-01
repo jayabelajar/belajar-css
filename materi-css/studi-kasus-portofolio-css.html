@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Portofolio — Anya Forger</title>
+  <meta name="description" content="Portofolio HTML5 + CSS3 bergaya brutalism: tegas, kontras, responsif.">
+
+  <style>
+    :root{
+      --ink:#0a0a0a;
+      --paper:#fdfdfd;
+      --brand:#1111ff;
+      --accent:#ff2e63;
+      --lime:#c1ff00;
+      --muted:#6b7280;
+      --radius:10px;
+      --b:3px;
+      --shadow:8px;
+      --maxw:1060px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* Utilities */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:20px; width:min(94%, var(--maxw));}
+    .brut{
+      border: var(--b) solid var(--ink);
+      box-shadow: var(--shadow) var(--shadow) 0 0 var(--ink);
+      border-radius: var(--radius);
+      background:#fff;
+    }
+    .btn{
+      display:inline-block;
+      padding:14px 18px;
+      border: var(--b) solid var(--ink);
+      background: var(--lime);
+      color: var(--ink);
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.2px;
+      box-shadow: 6px 6px 0 0 var(--ink);
+      transform: translate(0,0);
+      transition: transform .05s ease;
+    }
+    .btn:hover{ transform: translate(-2px,-2px) }
+    .btn:active{ transform: translate(2px,2px) }
+    .chip{
+      display:inline-block; padding:6px 10px; margin:3px 6px 0 0;
+      border: var(--b) solid var(--ink); border-radius:8px; background:#fff;
+      font-weight:700; font-size:.92rem;
+    }
+
+    /* Header */
+    header{
+      position: sticky; top:0; z-index:10; background:#fff;
+      border-bottom: var(--b) solid var(--ink);
+    }
+    .head{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 20px; max-width:var(--maxw); margin:0 auto; width:min(100%, var(--maxw));
+    }
+    .logo{
+      margin:0; font-size:clamp(1.1rem,3.2vw,1.5rem); font-weight:1000; letter-spacing:.3px;
+      padding:8px 12px; background:var(--lime);
+      border: var(--b) solid var(--ink); box-shadow: 4px 4px 0 0 var(--ink); border-radius:8px;
+    }
+    nav a{
+      color:var(--ink); text-decoration:none; font-weight:900; margin-left:14px;
+      padding:6px 10px; border: var(--b) solid var(--ink); border-radius:8px; background:#fff;
+    }
+    nav a:hover{ background:var(--brand); color:#fff }
+
+    /* Hero */
+    .hero{
+      margin-top:18px; padding:26px; display:grid; gap:18px; align-items:center;
+      grid-template-columns: 120px 1fr; background:#fff;
+      border: var(--b) solid var(--ink); border-radius: var(--radius);
+      box-shadow: var(--shadow) var(--shadow) 0 0 var(--ink);
+    }
+    .pfp{
+      aspect-ratio:1/1; width:100%; max-width:140px; object-fit:cover;
+      border-radius:12px; border: var(--b) solid var(--ink);
+      box-shadow: 10px 10px 0 0 var(--ink);
+    }
+    .hero h1{margin:0 0 6px 0; font-size:clamp(1.4rem,4.5vw,2rem); font-weight:1000}
+    .hero p{margin:0; color:var(--muted)}
+    .badges{margin-top:6px}
+    .badges .chip:nth-child(1){background:var(--brand); color:#fff}
+    .badges .chip:nth-child(2){background:var(--accent); color:#fff}
+
+    /* Sections */
+    section{scroll-margin-top:90px}
+    section h2{
+      font-size:1.35rem; margin:24px 0 10px 0; font-weight:1000;
+      display:inline-block; padding:6px 10px; background:#fff;
+      border: var(--b) solid var(--ink); border-radius:8px; box-shadow:4px 4px 0 0 var(--ink);
+    }
+
+    /* Proyek */
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card{
+      padding:16px; background:#fff; border: var(--b) solid var(--ink);
+      border-radius: var(--radius); box-shadow: var(--shadow) var(--shadow) 0 0 var(--ink);
+      transition: transform .08s ease;
+    }
+    .card:hover{ transform: translate(-3px,-3px) }
+    .card h3{margin:0 0 6px 0; font-size:1.05rem}
+    .meta{margin:8px 0; font-size:.95rem}
+    .meta b{font-weight:1000}
+    .stack{margin-top:6px}
+    .stack .chip{background:#fff}
+
+    /* Keahlian */
+    .skills{display:flex; flex-wrap:wrap; gap:8px}
+    .skills .chip{background:#fff}
+
+    details{margin-top:10px}
+    summary{
+      cursor:pointer; font-weight:1000; padding:8px 10px; display:inline-block;
+      border: var(--b) solid var(--ink); border-radius:8px; background:#fff;
+    }
+    details[open] summary{background:var(--lime)}
+
+    dl{display:grid; grid-template-columns:140px 1fr; gap:8px; margin-top:10px}
+    dt{font-weight:1000}
+    dd{margin:0}
+
+    /* Tabel pengalaman */
+    .table-wrap{overflow:auto}
+    table{
+      width:100%; border-collapse:collapse; background:#fff;
+      border: var(--b) solid var(--ink); border-radius: var(--radius); overflow:hidden;
+      box-shadow: var(--shadow) var(--shadow) 0 0 var(--ink);
+    }
+    th,td{padding:12px 10px; text-align:left; border-bottom: var(--b) solid var(--ink)}
+    th{background:var(--brand); color:#fff}
+    tr:last-child td{border-bottom:none}
+
+    /* Aside */
+    aside{
+      padding:14px 16px; background:#fff; border: var(--b) solid var(--ink);
+      border-radius: var(--radius); box-shadow: var(--shadow) var(--shadow) 0 0 var(--ink);
+    }
+
+    /* Kontak */
+    form.brut{padding:16px}
+    fieldset{border:none; padding:0; margin:0}
+    .form-grid{
+      display:grid; gap:12px;
+      grid-template-columns: 1fr;
+    }
+    label{font-weight:900}
+    input,textarea{
+      width:100%; padding:12px; border: var(--b) solid var(--ink); border-radius:8px; background:#fff;
+    }
+    textarea{min-height:130px; resize:vertical}
+    .form-actions{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+
+    /* Footer */
+    footer{
+      margin-top:30px; background:#fff; border-top: var(--b) solid var(--ink);
+      padding:24px 0; text-align:center;
+    }
+
+    /* Responsive */
+    @media (min-width: 720px){
+      .form-grid{ grid-template-columns: 1fr 1fr }
+      .form-grid .full{ grid-column: 1 / -1 }
+      .hero{ grid-template-columns: 160px 1fr }
+      .pfp{ max-width:180px }
+    }
+    @media (max-width: 540px){
+      nav{display:flex; flex-wrap:wrap; gap:8px}
+      nav a{margin:0}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="head">
+      <h1 class="logo">Anya Forger — Portofolio</h1>
+      <nav aria-label="Navigasi utama">
+        <a href="#tentang">Tentang</a>
+        <a href="#proyek">Proyek</a>
+        <a href="#keahlian">Keahlian</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="beranda">
+    <section class="hero">
+      <img class="pfp" src="https://akcdn.detik.net.id/visual/2022/06/30/anime-spy-x-family-anya-forger_169.jpeg?w=800" alt="Foto profil Anya Forger">
+      <div>
+        <h1>Web Developer</h1>
+        <div class="badges">
+          <span class="chip">Available for freelance</span>
+          <span class="chip">Based in East Java</span>
+        </div>
+        <div style="margin-top:14px">
+          <a class="btn" href="#proyek">Lihat Proyek</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="tentang" aria-labelledby="judul-tentang">
+      <h2 id="judul-tentang">Tentang Saya</h2>
+      <div class="brut" style="padding:16px">
+        <p>Saya fokus pada pengembangan antarmuka modern berbasis HTML5, CSS3 (Flexbox/Grid), dan praktik aksesibilitas. Saya menikmati menyusun design system kecil agar skala proyek tetap terjaga.</p>
+        <p style="margin-top:8px"><b>Email:</b> <a href="mailto:anya@example.com">anya@example.com</a> · <b>GitHub:</b> <a href="https://github.com/anyaforger" target="_blank" rel="noopener">anyaforger</a></p>
+      </div>
+    </section>
+
+    <section id="proyek" aria-labelledby="judul-proyek">
+      <h2 id="judul-proyek">Proyek</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Katalog Buku Kampus</h3>
+          <div class="meta"><b>Peran:</b> Frontend • <b>Tahun:</b> 2025</div>
+          <p>Antarmuka katalog buku dengan pencarian dan filter. Fokus pada tipografi dan keterbacaan.</p>
+          <div class="stack">
+            <span class="chip">HTML5</span><span class="chip">CSS Grid</span><span class="chip">A11y</span>
+          </div>
+          <p style="margin-top:10px"><a class="btn" href="#">Demo</a></p>
+        </article>
+
+        <article class="card">
+          <h3>Dashboard Perpustakaan</h3>
+          <div class="meta"><b>Peran:</b> UI Dev • <b>Tahun:</b> 2025</div>
+          <p>Layout dashboard CRUD dengan tabel dan kartu ringkas. Mengutamakan keteraturan grid dan kontras.</p>
+          <div class="stack">
+            <span class="chip">HTML</span><span class="chip">Flexbox</span><span class="chip">Table UX</span>
+          </div>
+          <p style="margin-top:10px"><a class="btn" href="#">Pratinjau</a></p>
+        </article>
+
+        <article class="card">
+          <h3>Landing Event Tech</h3>
+          <div class="meta"><b>Peran:</b> Frontend • <b>Tahun:</b> 2024</div>
+          <p>Landing page bergaya brutalism dengan headline kuat dan CTA kontras tinggi.</p>
+          <div class="stack">
+            <span class="chip">Typography</span><span class="chip">Hero</span><span class="chip">Responsive</span>
+          </div>
+          <p style="margin-top:10px"><a class="btn" href="#">Lihat</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="keahlian" aria-labelledby="judul-keahlian">
+      <h2 id="judul-keahlian">Keahlian</h2>
+      <div class="brut" style="padding:16px">
+        <div class="skills">
+          <span class="chip">HTML5 Semantik</span>
+          <span class="chip">CSS Flexbox/Grid</span>
+          <span class="chip">Design Tokens</span>
+          <span class="chip">Aksesibilitas</span>
+          <span class="chip">Git</span>
+        </div>
+
+        <details>
+          <summary>Detail Keahlian Teknis</summary>
+          <dl>
+            <dt>Front-End</dt><dd>HTML5, CSS3, pola UI skalabel</dd>
+            <dt>Desain</dt><dd>Prinsip kontras & hirarki, brutalism styling</dd>
+            <dt>Tools</dt><dd>VS Code, Git, DevTools</dd>
+          </dl>
+        </details>
+      </div>
+    </section>
+
+    <section id="pengalaman" aria-labelledby="judul-pengalaman">
+      <h2 id="judul-pengalaman">Pengalaman</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Peran</th><th>Perusahaan</th><th>Periode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Magang Frontend Developer</td><td>Tech Studio Bandung</td><td>Sep 2024 – Jan 2025</td></tr>
+            <tr><td>Volunteer IT Support</td><td>Community Center Cimahi</td><td>Jan 2023 – Jun 2023</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="kontak" aria-labelledby="judul-kontak">
+      <h2 id="judul-kontak">Kontak</h2>
+      <form class="brut" action="/kirim" method="POST">
+        <fieldset>
+          <div class="form-grid">
+            <div>
+              <label for="nama">Nama</label>
+              <input id="nama" name="nama" type="text" placeholder="Nama lengkap" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="nama@email.com" required>
+            </div>
+            <div class="full">
+              <label for="subjek">Subjek</label>
+              <input id="subjek" name="subjek" type="text" placeholder="Judul pesan" required>
+            </div>
+            <div class="full">
+              <label for="pesan">Pesan</label>
+              <textarea id="pesan" name="pesan" placeholder="Tulis pesan…"></textarea>
+            </div>
+          </div>
+          <div class="form-actions" style="margin-top:12px">
+            <button class="btn" type="submit">Kirim</button>
+            <a class="btn" href="mailto:anya@example.com">Email Langsung</a>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2025 Anya Forger · <a href="#beranda">Kembali ke atas</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
